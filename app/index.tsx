@@ -14,6 +14,9 @@ export default function Cards() {
         }}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={styles.list}>
+        <Link href="/loop/1" style={styles.loopLink}>
+          Open a screen that calls the hook next to its Stack.Screen options
+        </Link>
         {COLORS.concat(COLORS).map((color, index) => (
           <Link key={index} href={`/card/${index}`} asChild>
             <Link.Trigger withAppleZoom>
@@ -33,4 +36,5 @@ const styles = StyleSheet.create({
   card: { borderRadius: 20, height: 160, padding: 16 },
   cardTitle: { color: 'white', fontSize: 28, fontWeight: '800' },
   headerItem: { fontSize: 18, paddingHorizontal: 8 },
+  loopLink: { color: '#007aff', fontSize: 16 },
 });

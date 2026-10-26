@@ -7,11 +7,9 @@ export default function Card() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const index = Number(id);
 
-  // Only a swipe that starts within 44pt of the left edge should begin the zoom back.
-  usePreventZoomTransitionDismissal({ unstable_dismissalBoundsRect: { maxX: 44 } });
-
   return (
     <>
+      <EdgeOnlyDismissal />
       <Stack.Screen
         options={{
           title: `Card ${index + 1}`,
@@ -32,3 +30,12 @@ const styles = StyleSheet.create({
   body: { fontSize: 16, lineHeight: 22 },
   headerItem: { fontSize: 18, paddingHorizontal: 8 },
 });
+
+// Only a swipe that starts within 44pt of the left edge should begin the zoom back. Called from
+// a component of its own: in the screen component itself, next to <Stack.Screen options>, the
+// hook loops (see app/loop/[id].tsx).
+function EdgeOnlyDismissal() {
+  usePreventZoomTransitionDismissal({ unstable_dismissalBoundsRect: { maxX: 44 } });
+
+  return null;
+}
